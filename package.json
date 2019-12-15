@@ -4,6 +4,9 @@
   "description": "developing",
   "main": "index.js",
   "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +21,9 @@
   },
   "homepage": "https://github.com/qngnud/project-a#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "@vue/cli-service": "^4.1.1",
+    "express": "^4.17.1",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
   }
 }
