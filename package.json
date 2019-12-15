@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/qngnud/project-a/issues"
   },
-  "homepage": "https://github.com/qngnud/project-a#readme"
+  "homepage": "https://github.com/qngnud/project-a#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
