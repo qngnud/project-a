@@ -1,5 +1,5 @@
-let express = require('express')
-let b = require('./model/Brand')
+let express = require('express');
+let b = require('./model/Brand');
 let app = express();
 app.get('/',function (req, res) {
     // res.send("Hello the world");
