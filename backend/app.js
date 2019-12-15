@@ -1,5 +1,5 @@
 let express = require('express');
-var admin = require('firebase-admin');
+let admin = require('firebase-admin');
 let b = require('./model/Brand');
 
 admin.initializeApp({
@@ -11,11 +11,29 @@ const settings = {timestampsInSnapshots: true};
 fs.settings(settings);
 
 let app = express();
-app.get('/',function (req, res) {
+app.get('/',async function (req, res) {
     // res.send("Hello the world");
-    let obj = new b.Brand(1,"2","3","4","5","6");
-    let obj2 = new b.Brand(2,"3","4","5","6","7");
-    let arr = [obj,obj2];
-    res.json(arr);
+    let arr=[];
+    let brandList = fs.collection('brand');
+    let feedbackList = await brandList.get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                console.log(doc.id, '=>', doc.data());
+                arr.push(doc.data());
+            });
+        })
+        .catch(err => {
+            console.log("gi do");
+        });
+    await res.json(arr);
+    res.end();
+    // let arr=[];
+    // for(let i=0; i<1000; i++) {
+    //     let obj = b.Brand(i,'name'+i, 'image'+i, 'sound'+i, 'bg'+i,'detail'+i);
+    //     // arr.push(b);
+    //     let addDoc = fs.collection('brand').add(obj).then(ref => {
+    //         console.log('id = ', ref.id);
+    //     });
+    // }
 });
 app.listen(3000);
