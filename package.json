@@ -2,29 +2,20 @@
   "name": "project-a",
   "version": "1.0.0",
   "description": "developing",
-  "main": "index.js",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/qngnud/project-a.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/qngnud/project-a/issues"
-  },
-  "homepage": "https://github.com/qngnud/project-a#readme",
+  "main": "index.js",
   "dependencies": {
+    "core-js": "^3.4.3",
     "express": "^4.17.1",
     "firebase-admin": "^8.8.0",
-    "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vuetify": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -33,7 +24,11 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-vuetify": "^2.0.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.3.0"
   },
   "eslintConfig": {
     "root": true,
@@ -52,5 +47,15 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/qngnud/project-a/issues"
+  },
+  "homepage": "https://github.com/qngnud/project-a#readme",
+  "keywords": [],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qngnud/project-a.git"
+  }
 }
