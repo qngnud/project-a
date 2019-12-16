@@ -1,10 +1,10 @@
 <template>
-    
+    <div>Ahihi</div>
 </template>
 
 <script>
     export default {
-        name: "Sidebar"
+        name: "Sidebar",
     }
 </script>
 
