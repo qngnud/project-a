@@ -35,10 +35,10 @@ export const store = new Vuex.Store({
         ]
     },
     mutations: {
-        changeLayoutToGrid (state) {
+        changeLayoutToGrid(state) {
             state.layout = 'grid'
         },
-        changeLayoutToList (state) {
+        changeLayoutToList(state) {
             state.layout = 'list'
         }
     }

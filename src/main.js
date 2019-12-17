@@ -10,7 +10,6 @@ import {store} from "./store";
 
 Vue.use(VueRouter);
 
-
 Vue.config.productionTip = false;
 
 let router = new VueRouter({

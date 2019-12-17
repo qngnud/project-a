@@ -1,8 +1,9 @@
 function getConnection() {
     let admin = require('firebase-admin');
+    var serviceAccount = require("../credential/cf");
 
     admin.initializeApp({
-        credential: admin.credential.applicationDefault(),
+        credential: admin.credential.cert(serviceAccount),
         databaseURL: 'https://project-a-firebase.firebaseio.com'
     });
     let fs = admin.firestore();

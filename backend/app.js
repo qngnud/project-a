@@ -2,7 +2,14 @@ let express = require('express');
 let fs = require('./firestoreConnection').getConnection();
 
 let app = express();
-app.get('/homepage',async function (req, res) {
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+app.get('/app',async function (req, res, next) {
     let arr = [];
     let pageNumber = req.query.pageno;
     if (pageNumber==null) pageNumber=0;
@@ -14,7 +21,7 @@ app.get('/homepage',async function (req, res) {
                 arr.push(doc.data());
             })
         });
-    let data = {Data: arr}
+    let data = {Data: arr};
     await res.json(data);
     res.end();
 });
