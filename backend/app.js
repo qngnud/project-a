@@ -14,7 +14,8 @@ app.get('/homepage',async function (req, res) {
                 arr.push(doc.data());
             })
         });
-    await res.json(arr);
+    let data = {Data: arr}
+    await res.json(data);
     res.end();
 });
 app.listen(3000);
