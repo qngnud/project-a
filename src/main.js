@@ -6,7 +6,7 @@ import Home from "./components/Home";
 import Explore from "./components/Explore";
 import FeedBack from "./components/FeedBack";
 import Share from "./components/Share";
-import { store} from "./store";
+import {store} from "./store";
 
 Vue.use(VueRouter);
 
@@ -19,7 +19,8 @@ let router = new VueRouter({
             path: '/',
             name: 'home',
             component: Home
-        },        {
+        },
+        {
             path: '/explore',
             name: 'explore',
             component: Explore
@@ -35,7 +36,7 @@ let router = new VueRouter({
             component: Share
         }
     ]
-})
+});
 
 new Vue({
     router,
