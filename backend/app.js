@@ -1,13 +1,5 @@
 let express = require('express');
-let admin = require('firebase-admin');
-
-admin.initializeApp({
-    credential: admin.credential.applicationDefault(),
-    databaseURL: 'https://project-a-firebase.firebaseio.com'
-});
-let fs = admin.firestore();
-const settings = {timestampsInSnapshots: true};
-fs.settings(settings);
+let fs = require('./firestoreConnection');
 
 let app = express();
 app.get('/',async function (req, res) {
