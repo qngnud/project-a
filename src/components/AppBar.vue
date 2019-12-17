@@ -11,11 +11,11 @@
 
         <div class="toggle-group">
             <v-btn icon v-bind:class="{ 'active': layout === 'list'}" v-on:click="changeLayoutToList">
-                <v-icon>mdi-view-list</v-icon>
+                <v-icon v-bind:class="{ 'white--text' : layout === 'list'}">mdi-view-list</v-icon>
             </v-btn>
 
             <v-btn icon v-bind:class="{ 'active': layout === 'grid'}" v-on:click="changeLayoutToGrid">
-                <v-icon>mdi-apps</v-icon>
+                <v-icon v-bind:class="{ 'white--text' : layout === 'grid'}">mdi-apps</v-icon>
             </v-btn>
         </div>
 
@@ -48,6 +48,6 @@
         right: 5%;
     }
     .active{
-        background: #C84E89;
+        background: #F15F79;
     }
 </style>
