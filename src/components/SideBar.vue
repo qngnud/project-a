@@ -7,21 +7,31 @@
             class="navigation-drawer"
 
     >
-        <img class="logo" src="../assets/logo.svg"/>
-        <img src="../assets/top-background.svg"/>
+        <img class="logo" src="../assets/logo.svg" alt=""/>
+        <img src="../assets/top-background.svg" alt=""/>
 
         <div class="d-flex flex-column justify-space-around mx-auto">
 
             <router-link v-for="item in router" :key="item.icon" :to="item.router" class="mx-auto">
 
-                <v-btn v-if="item.active === true" class="ma-2 active router-button" x-large rounded>
-                    <v-icon left color="white">{{item.icon}}</v-icon>
-                    <span class="active-text">{{item.name}}</span>
-                </v-btn>
+                <v-btn class="ma-2 router-button"
+                       :class="{ 'active' : item.active === true}"
+                       x-large
+                       rounded
+                       v-bind:outlined="item.active!==true"
+                       v-bind:color="item.active === true ? '#828282' : ''"
+                       v-on:click="changeActive(item.name)"
+                       @click="changeCurrentPage(item.name)"
+                >
+                    <v-icon left
+                            v-bind:color="item.active === true ? 'white' : '#828282'"
+                    >
+                        {{item.icon}}
+                    </v-icon>
+                    <span :class="{ 'active-text' : item.active === true}">
+                        {{item.name}}
+                    </span>
 
-                <v-btn v-if="item.active === false" class="ma-2 router-button" x-large rounded outlined color="#828282">
-                    <v-icon left color="#828282">{{item.icon}}</v-icon>
-                    <span>{{item.name}}</span>
                 </v-btn>
 
             </router-link>
@@ -46,33 +56,12 @@
 <script>
     export default {
         name: "SideBar",
+        computed: {
+            router () {
+                return this.$store.state.router
+            }
+        },
         data: () => ({
-            router: [
-                {
-                    icon: 'mdi-home',
-                    name: 'Home',
-                    router: '/',
-                    active: true
-                },
-                {
-                    icon: 'mdi-compass',
-                    name: 'Explore',
-                    router: '/explore',
-                    active: false
-                },
-                {
-                    icon: 'mdi-share',
-                    name: 'Share',
-                    router: '/share',
-                    active: false
-                },
-                {
-                    icon: 'mdi-home',
-                    name: 'Feedback',
-                    router: '/feedback',
-                    active: false
-                }
-            ],
             links: [
                 {
                     name: "facebook",
@@ -94,7 +83,16 @@
                 }
             ]
         }),
-        methods: {}
+        methods: {
+            changeActive: function (name) {
+                for (let i = 0; i < this.router.length; i++) {
+                    this.router[i].active = this.router[i].name === name;
+                }
+            },
+            changeCurrentPage: function (name) {
+                this.$store.state.currentPage = name;
+            }
+        }
     }
 </script>
 

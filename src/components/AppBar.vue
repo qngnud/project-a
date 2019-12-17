@@ -1,11 +1,9 @@
 <template>
     <v-app-bar
             app
-            prominent
-            extended
             flat
     >
-        <v-toolbar-title color="primary"><span class="grey--text text--darken-2">Main content</span></v-toolbar-title>
+        <v-toolbar-title color="primary"><span class="grey--text text--darken-2">{{this.$store.state.currentPage}}</span></v-toolbar-title>
 
         <v-spacer/>
 
@@ -42,11 +40,6 @@
 </script>
 
 <style scoped>
-    .toggle-group{
-        position: absolute;
-        top: 50%;
-        right: 5%;
-    }
     .active{
         background: #F15F79;
     }
