@@ -1,8 +1,8 @@
 let express = require('express');
-let fs = require('./firestoreConnection');
+let fs = require('./firestoreConnection').getConnection();
 
 let app = express();
-app.get('/',async function (req, res) {
+app.get('/homepage',async function (req, res) {
     let arr = [];
     let pageNumber = req.query.pageno;
     if (pageNumber==null) pageNumber=0;

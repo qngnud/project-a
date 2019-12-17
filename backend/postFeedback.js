@@ -1,15 +1,15 @@
 let express = require('express');
-let fs = require('./firestoreConnection');
-
-const express = require('express');
+let fs = require('./firestoreConnection').getConnection();
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/post-test', (req, res) => {
+app.post('/feedback', (req, res) => {
+    req.body.receiveTime = (new Date()).getTime();
+    let addFeedback = fs.collection('feedback').add(req.body)
     console.log('Got body:', req.body);
     res.sendStatus(200);
 });
 
-app.listen(8080, () => console.log(`Started server at http://localhost:8080!`));
+app.listen(8080);
