@@ -6,7 +6,7 @@
                     justify="center"
             >
                 <v-col cols="10">
-                    <v-row v-if="layout === 'grid'" class="grid d-flex flex-row justify-lg-space-between">
+                    <v-row v-if="this.$store.state.layout === 'grid'" class="grid d-flex flex-row justify-lg-space-between">
                         <v-col
                                 cols="12"
                                 md="4"
@@ -38,7 +38,7 @@
                             </v-card>
                         </v-col>
                     </v-row>
-                    <v-row v-if="layout === 'list'" class="list d-flex flex-column justify-lg-space-between">
+                    <v-row v-if="this.$store.state.layout === 'list'" class="list d-flex flex-column justify-lg-space-between">
                         <v-col
                                 cols="12"
                                 md="12"

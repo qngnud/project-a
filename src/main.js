@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Explore from "./components/Explore";
 import FeedBack from "./components/FeedBack";
 import Share from "./components/Share";
+import { store} from "./store";
 
 Vue.use(VueRouter);
 
@@ -39,5 +40,6 @@ let router = new VueRouter({
 new Vue({
     router,
     vuetify,
+    store,
     render: h => h(App)
 }).$mount('#app');

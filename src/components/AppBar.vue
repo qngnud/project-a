@@ -10,11 +10,11 @@
         <v-spacer/>
 
         <div class="toggle-group">
-            <v-btn icon color="black" v-bind:class="{ 'active': layout === 'list'}" v-on:click="layout = 'list'">
+            <v-btn icon v-bind:class="{ 'active': layout === 'list'}" v-on:click="changeLayoutToList">
                 <v-icon>mdi-view-list</v-icon>
             </v-btn>
 
-            <v-btn icon color="black" v-bind:class="{ 'active': layout === 'grid'}" v-on:click="layout = 'grid'">
+            <v-btn icon v-bind:class="{ 'active': layout === 'grid'}" v-on:click="changeLayoutToGrid">
                 <v-icon>mdi-apps</v-icon>
             </v-btn>
         </div>
@@ -25,9 +25,17 @@
 <script>
     export default {
         name: "Sidebar",
-        data() {
-            return {
-                layout: 'grid'
+        computed: {
+            layout () {
+                return this.$store.state.layout
+            }
+        },
+        methods: {
+            changeLayoutToGrid () {
+                this.$store.commit('changeLayoutToGrid')
+            },
+            changeLayoutToList () {
+                this.$store.commit('changeLayoutToList')
             }
         }
     }
@@ -38,5 +46,8 @@
         position: absolute;
         top: 50%;
         right: 5%;
+    }
+    .active{
+        background: #C84E89;
     }
 </style>
