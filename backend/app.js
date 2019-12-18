@@ -1,5 +1,5 @@
 let express = require('express');
-let fs = require('./firestoreConnection').getConnection();
+let fs = require('./firestoreConnection');
 const NUMBER_PER_PAGE = 12;
 
 let app = express();
@@ -10,20 +10,27 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/app',async function (req, res, next) {
-    let arr = [];
+app.get('/getBrands',async function (req, res, next) {
     let pageNumber = req.query.page;
-    if (pageNumber==null) pageNumber=1;
-    pageNumber--;
-    await fs.collection('brand').orderBy('id').startAt(pageNumber*NUMBER_PER_PAGE+1).limit(NUMBER_PER_PAGE).get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
-                console.log(doc.id, '=>', doc.data());
-                arr.push(doc.data());
-            })
-        });
-    let data = {Data: arr};
+    let data = await fs.getAllWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE);
     await res.json(data);
     res.end();
 });
+
+app.get('/getTags',async function (req, res, next) {
+    let pageNumber = req.query.page;
+    let data = await fs.getAllWithPaging('tags','id',pageNumber,NUMBER_PER_PAGE);
+    await res.json(data);
+    res.end();
+});
+
+app.get('/getBrandsByTag',async function (req, res, next) {
+    let arr = [];
+    let pageNumber = req.query.page;
+    let tag = req.query.tag;
+    let data = await fs.getSatisfiedResultWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE,'tag','==',tag);
+    await res.json(data);
+    res.end();
+});
+
 app.listen(3000);
