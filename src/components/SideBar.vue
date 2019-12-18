@@ -4,13 +4,14 @@
             flat
             floating
             width="350px"
+
             class="navigation-drawer"
 
     >
         <img class="logo" src="../assets/logo.svg" alt=""/>
         <img src="../assets/top-background.svg" alt=""/>
 
-        <div class="d-flex flex-column justify-space-around mx-auto">
+        <div class="d-flex flex-column justify-space-around mx-auto mt-auto">
 
             <router-link v-for="item in router" :key="item.icon" :to="item.router" class="mx-auto">
 
@@ -18,6 +19,7 @@
                        :class="{ 'active' : item.active === true}"
                        x-large
                        rounded
+                       depressed
                        v-bind:outlined="item.active!==true"
                        v-bind:color="item.active === true ? '#828282' : ''"
                        v-on:click="changeActive(item.name)"

@@ -6,8 +6,11 @@ import Home from "./components/Home";
 import Explore from "./components/Explore";
 import FeedBack from "./components/FeedBack";
 import Share from "./components/Share";
+import InfiniteLoading from 'vue-infinite-loading';
+
 import {store} from "./store";
 
+Vue.use(InfiniteLoading);
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
