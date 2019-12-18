@@ -2,56 +2,67 @@
     <v-navigation-drawer
             app
             flat
-            floating
-            width="350px"
-
             class="navigation-drawer"
-
+            overflow
+            :mini-variant="minivariant"
     >
-        <img class="logo" src="../assets/logo.svg" alt=""/>
-        <img src="../assets/top-background.svg" alt=""/>
+        <v-list-item>
+            <v-list-item-content>
+                <v-list-item-title class="title">
+                    Brand
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                    Did you pronounce it correctly?
+                </v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list-item>
 
-        <div class="d-flex flex-column justify-space-around mx-auto mt-auto">
 
-            <router-link v-for="item in router" :key="item.icon" :to="item.router" class="mx-auto">
+        <v-list>
 
-                <v-btn class="ma-2 router-button"
-                       :class="{ 'active' : item.active === true}"
-                       x-large
-                       rounded
-                       depressed
-                       v-bind:outlined="item.active!==true"
-                       v-bind:color="item.active === true ? '#828282' : ''"
-                       v-on:click="changeActive(item.name)"
-                       @click="changeCurrentPage(item.name)"
+            <router-link v-for="item in router" :key="item.icon" :to="item.router">
+                <v-list-item
+                        link
+                        @click="changeCurrentPage(item.name)"
+                        v-on:click="changeActive(item.name)"
+                        :class="{ 'active' : item.active === true}"
                 >
-                    <v-icon left
-                            v-bind:color="item.active === true ? 'white' : '#828282'"
+                    <v-list-item-icon
+
                     >
-                        {{item.icon}}
-                    </v-icon>
-                    <span :class="{ 'active-text' : item.active === true}">
-                        {{item.name}}
-                    </span>
+                        <v-icon
+                                v-bind:color="item.active === true ? 'white' : '#828282'"
+                        >
+                            {{ item.icon }}
+                        </v-icon>
+                    </v-list-item-icon>
 
-                </v-btn>
-
+                    <v-list-item-content
+                            v-bind:class="item.active === true ? 'white--text' : 'grey--text'"
+                    >
+                        <v-list-item-title>{{ item.name }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
             </router-link>
+        </v-list>
 
-        </div>
 
-        <div class="d-flex flex-row mx-auto social-link justify-space-around mb-5">
-            <a
-                    v-for="link in links"
-                    :key="link.name"
-                    :href="link.href"
-                    :target="link.target"
-                    rel="noopener noreferrer">
-                <v-icon large color="white darken-2">{{ link.icon }}</v-icon>
-            </a>
-        </div>
+        <template v-slot:append>
+            <div class="d-flex mx-auto justify-space-around mb-5 mx-auto"
+                 :class="minivariant === true ? 'flex-column' : 'flex-row'"
+            >
+                <a
+                        class="mx-auto"
+                        v-for="link in links"
+                        :key="link.name"
+                        :href="link.href"
+                        :target="link.target"
+                        rel="noopener noreferrer">
+                    <v-icon large class="social-icon">{{ link.icon }}</v-icon>
+                </a>
+            </div>
+        </template>
 
-        <img class="bottom-background" src="../assets/bot-background.svg"/>
     </v-navigation-drawer>
 </template>
 
@@ -59,8 +70,11 @@
     export default {
         name: "SideBar",
         computed: {
-            router () {
+            router() {
                 return this.$store.state.router
+            },
+            minivariant() {
+                return this.$store.state.miniVariant
             }
         },
         data: () => ({
@@ -99,25 +113,11 @@
 </script>
 
 <style scoped>
-    .bottom-background {
-        position: absolute;
-        bottom: 0px;
-    }
-
-    .logo {
-        position: absolute;
-        top: 50px;
-        left: 20px;
-    }
-
-    .social-link {
-        position: absolute;
-        bottom: 0;
-        z-index: 2;
-    }
-
     .active {
         background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
+    }
+    .social-icon{
+        color: #F15F79;
     }
 
     .active-text {
@@ -126,13 +126,5 @@
 
     a {
         text-decoration: none;
-    }
-
-    .router-button {
-        width: 200px;
-    }
-
-    .social-link {
-        width: 350px;
     }
 </style>

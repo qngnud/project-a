@@ -12,37 +12,37 @@
                         <v-col
                                 cols="12"
                                 md="3"
-                                v-for="item in data"
+                                v-for="item in list"
                                 :key="item.id"
                         >
+                            <v-hover v-slot:default="{ hover }">
 
-                            <v-card
-                                    class="mx-auto"
-                                    max-width="250"
-                                    max-height="300px"
-                                    shaped
-                                    dark
-                                    :color="item.bgColor"
-                            >
-                                <v-img
-                                        class="align-end"
-                                        height="150px"
-                                        :src="item.linkImage"
+                                <v-card
+                                        class="mx-auto card"
+                                        dark
+                                        :color="item.bgColor"
+                                        :elevation="hover ? 12 : 2"
                                 >
-                                </v-img>
-                                <v-card-title class="headline">{{item.name}}</v-card-title>
-                                <v-card-subtitle>phien am</v-card-subtitle>
-
-                                <v-card-actions>
-                                    <v-btn class="mx-auto"
-                                           fab
-                                           text
-                                           @click="playSound(item.linkSound)"
+                                    <v-img
+                                            class="align-end"
+                                            height="150px"
+                                            :src="item.linkImage"
                                     >
-                                        <v-icon large>mdi-play-circle-outline</v-icon>
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
+                                    </v-img>
+                                    <v-card-title class="headline">{{item.name}}</v-card-title>
+                                    <v-card-subtitle>phien am</v-card-subtitle>
+
+                                    <v-card-actions>
+                                        <v-btn class="mx-auto"
+                                               fab
+                                               text
+                                               @click="playSound(item.linkSound)"
+                                        >
+                                            <v-icon large>mdi-play-circle-outline</v-icon>
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-hover>
                         </v-col>
                     </v-row>
 
@@ -51,58 +51,61 @@
                         <v-col
                                 cols="12"
                                 md="12"
-                                v-for="item in data"
+                                v-for="item in list"
                                 :key="item.id"
                         >
-                            <v-card
-                                    class="mx-auto d-flex flex-row justify-space-between"
-                                    dark
-                                    :color="item.bgColor"
-                                    max-height="250px"
-                                    shaped
-                            >
-                                <v-row>
-                                    <v-col cols="12"
-                                           md="3"
-                                    >
-                                        <v-img
-                                                class="align-start"
-                                                width="300px"
-                                                :src="item.linkImage"
+                            <v-hover v-slot:default="{ hover }">
+                                <v-card
+                                        class="mx-auto d-flex flex-row justify-space-between"
+                                        dark
+                                        :color="item.bgColor"
+                                        max-height="250px"
+                                        :elevation="hover ? 12 : 2"
+                                >
+                                    <v-row>
+                                        <v-col cols="12"
+                                               md="3"
                                         >
-                                        </v-img>
-
-                                    </v-col>
-                                    <v-col
-                                            cols="12"
-                                            md="8"
-                                    >
-                                        <v-card-title>{{item.name}}</v-card-title>
-                                        <v-card-subtitle>Ahihi</v-card-subtitle>
-                                        <v-card-text>{{item.detail}}</v-card-text>
-                                    </v-col>
-                                    <v-col
-                                            cols="12"
-                                            md="1"
-                                    >
-                                        <v-card-actions>
-
-                                            <v-btn
-                                                    color="white"
-                                                    icon
-                                                    class="mx-auto my-auto"
-
-                                                    @click="playSound('https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3')"
+                                            <v-img
+                                                    class="align-start"
+                                                    width="300px"
+                                                    :src="item.linkImage"
                                             >
-                                                <v-icon x-large>mdi-play-circle-outline</v-icon>
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </v-col>
-                                </v-row>
-                            </v-card>
+                                            </v-img>
+
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                md="8"
+                                        >
+                                            <v-card-title>{{item.name}}</v-card-title>
+                                            <v-card-subtitle>Ahihi</v-card-subtitle>
+                                            <v-card-text>{{item.detail}}</v-card-text>
+                                        </v-col>
+                                        <v-col
+                                                cols="12"
+                                                md="1"
+                                        >
+                                            <v-card-actions>
+
+                                                <v-btn
+                                                        color="white"
+                                                        icon
+                                                        class="mx-auto my-auto"
+                                                        @click="playSound('https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3')"
+                                                >
+                                                    <v-icon x-large>mdi-play-circle-outline</v-icon>
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-col>
+                                    </v-row>
+                                </v-card>
+                            </v-hover>
                         </v-col>
-                        <infinite-loading @infinite="infiniteHandler"/>
+
                     </v-row>
+
+                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
                 </v-col>
             </v-row>
         </v-container>
@@ -114,19 +117,18 @@
     import axios from 'axios'
     import InfiniteLoading from 'vue-infinite-loading';
 
+    const api = 'http://localhost:3000/app';
+
     export default {
         name: "Home",
         components: {
             InfiniteLoading
         },
         data: () => ({
-            data: [],
+            list: [],
             errors: '',
             page: 1,
         }),
-        // mounted() {
-        //     this.getData()
-        // },
         methods: {
             playSound(url) {
                 if (url) {
@@ -136,14 +138,14 @@
 
             },
             infiniteHandler($state) {
-                axios.get('http://localhost:3000/app', {
+                axios.get(api, {
                     params: {
                         page: this.page,
                     },
-                }).then(({response}) => {
-                    if (response.Data.length) {
+                }).then(({data}) => {
+                    if (data.Data.length) {
                         this.page += 1;
-                        this.data.push(...response.Data);
+                        this.list.push(...data.Data);
                         $state.loaded();
                     } else {
                         $state.complete();
@@ -155,5 +157,7 @@
 </script>
 
 <style scoped>
-
+    .card {
+        border-radius: 30px;
+    }
 </style>

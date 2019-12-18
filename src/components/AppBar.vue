@@ -2,10 +2,23 @@
     <v-app-bar
             app
             flat
+            hide-on-scroll
+            color="#fafafa"
     >
-        <v-toolbar-title color="primary"><span class="grey--text text--darken-2">{{this.$store.state.currentPage}}</span></v-toolbar-title>
+        <v-app-bar-nav-icon
+                @click="changeMiniVariant"
+        />
+
+        <v-toolbar-title color="primary"><span
+                class="grey--text text--darken-2">{{this.$store.state.currentPage}}</span></v-toolbar-title>
 
         <v-spacer/>
+        <v-text-field
+                class="mt-5"
+                label="Search"
+        />
+        <v-spacer/>
+
 
         <div class="toggle-group">
             <v-btn icon v-bind:class="{ 'active': layout === 'list'}" v-on:click="changeLayoutToList">
@@ -17,6 +30,7 @@
             </v-btn>
         </div>
 
+
     </v-app-bar>
 </template>
 
@@ -24,23 +38,26 @@
     export default {
         name: "Sidebar",
         computed: {
-            layout () {
+            layout() {
                 return this.$store.state.layout
             }
         },
         methods: {
-            changeLayoutToGrid () {
+            changeLayoutToGrid() {
                 this.$store.commit('changeLayoutToGrid')
             },
-            changeLayoutToList () {
+            changeLayoutToList() {
                 this.$store.commit('changeLayoutToList')
+            },
+            changeMiniVariant() {
+                this.$store.commit('changeMiniVariant')
             }
         }
     }
 </script>
 
 <style scoped>
-    .active{
+    .active {
         background: #F15F79;
     }
 </style>
