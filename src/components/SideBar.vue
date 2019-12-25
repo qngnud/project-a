@@ -6,9 +6,20 @@
             overflow
             :mini-variant="minivariant"
     >
-        <v-list-item>
+
+        <v-list-item
+                class="pt-2"
+        >
+
             <v-list-item-content>
-                <v-list-item-title class="title">
+                <v-img src="../assets/logo.svg"
+                       max-width="50px"
+                       max-height="50px"
+                       v-if="minivariant"
+                />
+                <v-list-item-title v-if="!minivariant"
+                                   class="title"
+                >
                     Brand
                 </v-list-item-title>
                 <v-list-item-subtitle>
@@ -116,7 +127,8 @@
     .active {
         background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
     }
-    .social-icon{
+
+    .social-icon {
         color: #F15F79;
     }
 

@@ -2,6 +2,7 @@
   <dictionary name="noface">
     <words>
       <w>antd</w>
+      <w>axios</w>
       <w>minivariant</w>
       <w>sider</w>
     </words>

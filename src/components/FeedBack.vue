@@ -6,66 +6,51 @@
                     justify="center"
             >
                 <v-col cols="10">
-                    <v-card>
-                        <v-card-text>
-                            <v-row>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                                <v-col
-                                        cols="12"
-                                        md="4"
-                                >
-                                    <span>Item</span>
-                                </v-col>
-                            </v-row>
-                        </v-card-text>
-                    </v-card>
+                    <v-form
+                            ref="form"
+                            v-model="valid"
+                            lazy-validation
+                    >
+                        <v-text-field
+                                v-model="name"
+                                :counter="10"
+                                :rules="nameRules"
+                                label="Name"
+                                required
+                        />
+
+                        <v-text-field
+                                v-model="email"
+                                :rules="emailRules"
+                                label="E-mail"
+                                required
+                        />
+
+                        <v-textarea
+                            v-model="message"
+                            label="Your message"
+                        />
+
+
+
+
+                        <v-btn
+                                :disabled="!valid"
+                                color="success"
+                                class="mr-4"
+                                @click="validate"
+                        >
+                            Validate
+                        </v-btn>
+
+                        <v-btn
+                                color="error"
+                                class="mr-4"
+                                @click="reset"
+                        >
+                            Reset
+                        </v-btn>
+                    </v-form>
                 </v-col>
             </v-row>
         </v-container>
@@ -74,7 +59,21 @@
 
 <script>
     export default {
-        name: "FeedBack"
+        name: "FeedBack",
+        data: () => ({
+            valid: true,
+            message: '',
+            name: '',
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            ],
+            email: '',
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+        })
     }
 </script>
 

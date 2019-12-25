@@ -6,19 +6,20 @@
                     justify="center"
             >
                 <v-col cols="10">
-
                     <v-row v-if="this.$store.state.layout === 'grid'"
-                           class="grid d-flex flex-row justify-space-between">
+                           class="d-flex flex-row"
+                    >
+
                         <v-col
-                                cols="12"
-                                md="3"
                                 v-for="item in list"
                                 :key="item.id"
+                                class="shrink"
                         >
-                            <v-hover v-slot:default="{ hover }">
-
+                            <v-hover v-slot:default="{ hover }"
+                            >
                                 <v-card
-                                        class="mx-auto card"
+                                        class="mx-auto"
+                                        width="200px"
                                         dark
                                         :color="item.bgColor"
                                         :elevation="hover ? 12 : 2"
@@ -44,6 +45,7 @@
                                 </v-card>
                             </v-hover>
                         </v-col>
+
                     </v-row>
 
                     <v-row v-if="this.$store.state.layout === 'list'"
@@ -108,6 +110,7 @@
                     <infinite-loading @infinite="infiniteHandler"></infinite-loading>
                 </v-col>
             </v-row>
+
         </v-container>
     </v-content>
 
@@ -117,7 +120,7 @@
     import axios from 'axios'
     import InfiniteLoading from 'vue-infinite-loading';
 
-    const api = 'http://localhost:3000/app';
+    const api = 'http://localhost:3000/getBrands';
 
     export default {
         name: "Home",
@@ -128,6 +131,7 @@
             list: [],
             errors: '',
             page: 1,
+            dialog: false
         }),
         methods: {
             playSound(url) {
@@ -135,7 +139,6 @@
                     let audio = new Audio(url)
                     audio.play();
                 }
-
             },
             infiniteHandler($state) {
                 axios.get(api, {
@@ -157,7 +160,5 @@
 </script>
 
 <style scoped>
-    .card {
-        border-radius: 30px;
-    }
+
 </style>
