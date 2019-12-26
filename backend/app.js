@@ -5,13 +5,14 @@ const NUMBER_PER_PAGE = 12;
 let app = express();
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
 app.get('/getBrands',async function (req, res, next) {
     let pageNumber = req.query.page;
+    console.log('getHere');
     let data = await fs.getAllWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE);
     await res.json(data);
     res.end();
@@ -19,7 +20,7 @@ app.get('/getBrands',async function (req, res, next) {
 
 app.get('/getTags',async function (req, res, next) {
     let pageNumber = req.query.page;
-    let data = await fs.getAllWithPaging('tags','id',pageNumber,NUMBER_PER_PAGE);
+    let data = await fs.getAllWithPaging('tag','id',pageNumber,NUMBER_PER_PAGE);
     await res.json(data);
     res.end();
 });
