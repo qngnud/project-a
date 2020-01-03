@@ -120,7 +120,7 @@
     import axios from 'axios'
     import InfiniteLoading from 'vue-infinite-loading';
 
-    const api = 'http://localhost:3000/getBrands';
+    const api = 'http://localhost:3000/getbrands';
 
     export default {
         name: "Home",

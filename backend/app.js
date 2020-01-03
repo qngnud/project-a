@@ -1,6 +1,7 @@
-let express = require('express');
-let fs = require('./firestoreConnection');
+const bodyParser = require('body-parser');
 const NUMBER_PER_PAGE = 12;
+let express = require('express');
+let fsConnection = require('./firestoreConnection');
 
 let app = express();
 
@@ -10,17 +11,20 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/getBrands',async function (req, res, next) {
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.get('/getBrands', async function (req, res, next) {
     let pageNumber = req.query.page;
     console.log('getHere');
-    let data = await fs.getAllWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE);
+    let data = await fsConnection.getAllWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE);
     await res.json(data);
     res.end();
 });
 
 app.get('/getTags',async function (req, res, next) {
     let pageNumber = req.query.page;
-    let data = await fs.getAllWithPaging('tag','id',pageNumber,NUMBER_PER_PAGE);
+    let data = await fsConnection.getAllWithPaging('tag','id',pageNumber,NUMBER_PER_PAGE);
     await res.json(data);
     res.end();
 });
@@ -29,9 +33,25 @@ app.get('/getBrandsByTag',async function (req, res, next) {
     let arr = [];
     let pageNumber = req.query.page;
     let tag = req.query.tag;
-    let data = await fs.getSatisfiedResultWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE,'tag','==',tag);
+    let data = await fsConnection.getSatisfiedResultWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE,'tag','==',tag);
     await res.json(data);
     res.end();
+});
+
+app.get('/getBrandsByInfo',async function (req, res, next) {
+    let arr = [];
+    let pageNumber = req.query.page;
+    let tag = req.query.tag;
+    let data = await fsConnection.getSatisfiedResultWithPaging('brand','id',pageNumber,NUMBER_PER_PAGE,'name','==',tag);
+    await res.json(data);
+    res.end();
+});
+
+app.post('/postFeedback', (req, res) => {
+    req.body.receiveTime = (new Date()).getTime();
+    let addFeedback = fsConnection.addData('feedback',req.body);
+    console.log('Got body:', req.body);
+    res.sendStatus(200);
 });
 
 app.listen(3000);
