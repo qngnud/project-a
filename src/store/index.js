@@ -7,7 +7,6 @@ export const store = new Vuex.Store({
     state: {
         layout: 'grid',
         currentPage: 'Home',
-        miniVariant: false,
         router: [
             {
                 icon: 'mdi-home',
@@ -41,9 +40,6 @@ export const store = new Vuex.Store({
         },
         changeLayoutToList(state) {
             state.layout = 'list'
-        },
-        changeMiniVariant(state){
-            state.miniVariant = !state.miniVariant
         }
     }
 });

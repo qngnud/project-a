@@ -107,7 +107,7 @@
 
                     </v-row>
 
-                    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+                    <infinite-loading @infinite="infiniteHandler"/>
                 </v-col>
             </v-row>
 

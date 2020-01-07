@@ -25,17 +25,6 @@
                                         :elevation="hover ? 12 : 2"
                                 >
                                     <v-card-title class="headline">{{item.name}}</v-card-title>
-                                    <v-card-subtitle>phien am</v-card-subtitle>
-
-                                    <v-card-actions>
-                                        <v-btn class="mx-auto"
-                                               fab
-                                               text
-                                               @click="playSound(item.linkSound)"
-                                        >
-                                            <v-icon large>mdi-play-circle-outline</v-icon>
-                                        </v-btn>
-                                    </v-card-actions>
                                 </v-card>
                             </v-hover>
                         </v-col>
@@ -75,24 +64,7 @@
                                                 md="8"
                                         >
                                             <v-card-title>{{item.name}}</v-card-title>
-                                            <v-card-subtitle>Ahihi</v-card-subtitle>
                                             <v-card-text>{{item.detail}}</v-card-text>
-                                        </v-col>
-                                        <v-col
-                                                cols="12"
-                                                md="1"
-                                        >
-                                            <v-card-actions>
-
-                                                <v-btn
-                                                        color="white"
-                                                        icon
-                                                        class="mx-auto my-auto"
-                                                        @click="playSound('https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3')"
-                                                >
-                                                    <v-icon x-large>mdi-play-circle-outline</v-icon>
-                                                </v-btn>
-                                            </v-card-actions>
                                         </v-col>
                                     </v-row>
                                 </v-card>
@@ -125,15 +97,8 @@
             list: [],
             errors: '',
             page: 1,
-            dialog: false
         }),
         methods: {
-            playSound(url) {
-                if (url) {
-                    let audio = new Audio(url)
-                    audio.play();
-                }
-            },
             infiniteHandler($state) {
                 axios.get(api, {
                     params: {

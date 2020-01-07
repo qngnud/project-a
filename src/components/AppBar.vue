@@ -5,13 +5,6 @@
             hide-on-scroll
             color="#fafafa"
     >
-        <v-app-bar-nav-icon
-                @click="changeMiniVariant"
-        />
-
-        <v-toolbar-title color="primary"><span
-                class="grey--text text--darken-2">{{this.$store.state.currentPage}}</span></v-toolbar-title>
-
         <v-spacer/>
         <v-text-field
                 class="mt-5"

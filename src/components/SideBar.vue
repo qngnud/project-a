@@ -2,23 +2,14 @@
     <v-navigation-drawer
             app
             flat
-            class="navigation-drawer"
-            overflow
-            :mini-variant="minivariant"
+            permanent
     >
-
         <v-list-item
                 class="pt-2"
         >
-
             <v-list-item-content>
-                <v-img src="../assets/logo.svg"
-                       max-width="50px"
-                       max-height="50px"
-                       v-if="minivariant"
-                />
-                <v-list-item-title v-if="!minivariant"
-                                   class="title"
+                <v-list-item-title
+                        class="title"
                 >
                     Brand
                 </v-list-item-title>
@@ -30,7 +21,6 @@
 
 
         <v-list>
-
             <router-link v-for="item in router" :key="item.icon" :to="item.router">
                 <v-list-item
                         link
@@ -60,7 +50,6 @@
 
         <template v-slot:append>
             <div class="d-flex mx-auto justify-space-around mb-5 mx-auto"
-                 :class="minivariant === true ? 'flex-column' : 'flex-row'"
             >
                 <a
                         class="mx-auto"
@@ -84,11 +73,9 @@
             router() {
                 return this.$store.state.router
             },
-            minivariant() {
-                return this.$store.state.miniVariant
-            }
         },
         data: () => ({
+            model: null,
             links: [
                 {
                     name: "facebook",
