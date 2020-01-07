@@ -2,10 +2,10 @@ import Vue from 'vue'
 import App from './App'
 import vuetify from './plugins/vuetify';
 import VueRouter from 'vue-router'
-import Home from "./components/Home";
-import Explore from "./components/Explore";
-import FeedBack from "./components/FeedBack";
-import Share from "./components/Share";
+import Home from "./components/core/Home";
+import Explore from "./components/core/Explore";
+import FeedBack from "./components/core/FeedBack";
+import Share from "./components/core/Share";
 import InfiniteLoading from 'vue-infinite-loading';
 
 import {store} from "./store";

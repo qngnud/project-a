@@ -41,9 +41,6 @@
             },
             changeLayoutToList() {
                 this.$store.commit('changeLayoutToList')
-            },
-            changeMiniVariant() {
-                this.$store.commit('changeMiniVariant')
             }
         }
     }

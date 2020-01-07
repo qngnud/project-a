@@ -40,6 +40,9 @@ export const store = new Vuex.Store({
         },
         changeLayoutToList(state) {
             state.layout = 'list'
+        },
+        changeActive(_router){
+            this.state.router = _router
         }
     }
 });

@@ -97,14 +97,27 @@
                 }
             ]
         }),
+        //TODO still bug
+        watch: {
+            router: function () {
+                this.updateRouter(this.router())
+            }
+        },
         methods: {
             changeActive: function (name) {
                 for (let i = 0; i < this.router.length; i++) {
-                    this.router[i].active = this.router[i].name === name;
+                    if (this.router[i].name === name) {
+                        this.router[i].active = true
+                    } else {
+                        this.router[i].active = false
+                    }
                 }
             },
             changeCurrentPage: function (name) {
                 this.$store.state.currentPage = name;
+            },
+            updateRouter: function (_router) {
+                this.$store.state.router = _router;
             }
         }
     }
