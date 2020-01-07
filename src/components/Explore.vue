@@ -48,17 +48,6 @@
                                         :elevation="hover ? 12 : 2"
                                 >
                                     <v-row>
-                                        <v-col cols="12"
-                                               md="3"
-                                        >
-                                            <v-img
-                                                    class="align-start"
-                                                    width="300px"
-                                                    :src="item.linkImage"
-                                            >
-                                            </v-img>
-
-                                        </v-col>
                                         <v-col
                                                 cols="12"
                                                 md="8"
