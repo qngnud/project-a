@@ -41,6 +41,10 @@ let router = new VueRouter({
         }
     ]
 });
+router.replace({
+    path: '',
+    redirect: '/home'
+})
 
 new Vue({
     router,

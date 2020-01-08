@@ -6,33 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         layout: 'grid',
-        currentPage: 'Home',
-        router: [
-            {
-                icon: 'mdi-home',
-                name: 'Home',
-                router: '/',
-                active: true
-            },
-            {
-                icon: 'mdi-compass',
-                name: 'Explore',
-                router: '/explore',
-                active: false
-            },
-            {
-                icon: 'mdi-share',
-                name: 'Share',
-                router: '/share',
-                active: false
-            },
-            {
-                icon: 'mdi-message',
-                name: 'Feedback',
-                router: '/feedback',
-                active: false
-            }
-        ]
+        currentPage: 'Home'
     },
     mutations: {
         changeLayoutToGrid(state) {
@@ -40,9 +14,6 @@ export const store = new Vuex.Store({
         },
         changeLayoutToList(state) {
             state.layout = 'list'
-        },
-        changeActive(_router){
-            this.state.router = _router
         }
     }
 });

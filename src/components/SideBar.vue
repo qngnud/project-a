@@ -21,30 +21,91 @@
 
 
         <v-list>
-            <router-link v-for="item in router" :key="item.icon" :to="item.router">
+            <router-link to="/" class="nav-link">
                 <v-list-item
                         link
-                        @click="changeCurrentPage(item.name)"
-                        v-on:click="changeActive(item.name)"
-                        :class="{ 'active' : item.active === true}"
+                        :class="[currentPage !== '/' ? '' : activeClass, 'nav-item']"
                 >
                     <v-list-item-icon
-
                     >
                         <v-icon
-                                v-bind:color="item.active === true ? 'white' : '#828282'"
+                                v-bind:color="currentPage === '/' ? 'white' : ''"
                         >
-                            {{ item.icon }}
+                            mdi-home
                         </v-icon>
                     </v-list-item-icon>
 
                     <v-list-item-content
-                            v-bind:class="item.active === true ? 'white--text' : 'grey--text'"
+                            v-bind:class="[currentPage !== '/' ? 'grey--text' : 'white--text']"
                     >
-                        <v-list-item-title>{{ item.name }}</v-list-item-title>
+                        <v-list-item-title>Home</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </router-link>
+            <router-link to="/explore" class="nav-link">
+                <v-list-item
+                        link
+                        :class="[currentPage.includes('explore') ? activeClass : '', 'nav-item']"
+                >
+                    <v-list-item-icon
+                    >
+                        <v-icon
+                                v-bind:color="currentPage === '/explore' ? 'white' : ''"
+                        >
+                            mdi-compass
+                        </v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content
+                            v-bind:class="[currentPage.includes('explore') ? 'white--text' : 'grey--text' ]"
+                    >
+                        <v-list-item-title>Explore</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </router-link>
+            <router-link to="/share" class="nav-link">
+                <v-list-item
+                        link
+                        :class="[currentPage.includes('share') ? activeClass : '', 'nav-item']"
+                >
+                    <v-list-item-icon
+                    >
+                        <v-icon
+                                v-bind:color="currentPage === '/share' ? 'white' : ''"
+                        >
+                            mdi-share
+                        </v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content
+                            v-bind:class="[currentPage.includes('share') ? 'white--text' : 'grey--text' ]"
+                    >
+                        <v-list-item-title>Share</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </router-link>
+            <router-link to="/feedback" class="nav-link">
+                <v-list-item
+                        link
+                        :class="[currentPage.includes('feedback') ? activeClass : '', 'nav-item']"
+                >
+                    <v-list-item-icon
+                    >
+                        <v-icon
+                                v-bind:color="currentPage === '/feedback' ? 'white' : ''"
+                        >
+                            mdi-message
+                        </v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content
+                            v-bind:class="[currentPage.includes('feedback') ? 'white--text' : 'grey--text' ]"
+                    >
+                        <v-list-item-title>Feedback</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </router-link>
+
         </v-list>
 
 
@@ -69,13 +130,9 @@
 <script>
     export default {
         name: "SideBar",
-        computed: {
-            router() {
-                return this.$store.state.router
-            },
-        },
         data: () => ({
             model: null,
+            activeClass: 'active',
             links: [
                 {
                     name: "facebook",
@@ -98,26 +155,14 @@
             ]
         }),
         //TODO still bug
-        watch: {
-            router: function () {
-                this.updateRouter(this.router())
+        computed: {
+            currentPage() {
+                return this.$route.path;
             }
         },
         methods: {
-            changeActive: function (name) {
-                for (let i = 0; i < this.router.length; i++) {
-                    if (this.router[i].name === name) {
-                        this.router[i].active = true
-                    } else {
-                        this.router[i].active = false
-                    }
-                }
-            },
             changeCurrentPage: function (name) {
                 this.$store.state.currentPage = name;
-            },
-            updateRouter: function (_router) {
-                this.$store.state.router = _router;
             }
         }
     }
@@ -130,6 +175,22 @@
 
     .social-icon {
         color: #F15F79;
+    }
+
+    .router-link-active {
+        opacity: 1;
+        visibility: visible;
+        background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
+        color: white;
+        transition: all 0.25s;
+    }
+
+    .active {
+        opacity: 1;
+        visibility: visible;
+        background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
+        color: white;
+        transition: all 0.25s;
     }
 
     .active-text {
