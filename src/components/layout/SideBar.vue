@@ -169,32 +169,17 @@
 </script>
 
 <style scoped>
-    .active {
-        background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
-    }
 
     .social-icon {
         color: #F15F79;
     }
 
-    .router-link-active {
-        opacity: 1;
-        visibility: visible;
-        background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
-        color: white;
-        transition: all 0.25s;
-    }
-
     .active {
         opacity: 1;
         visibility: visible;
         background: linear-gradient(90deg, #C84E89 0%, #F15F79 100%);
         color: white;
         transition: all 0.25s;
-    }
-
-    .active-text {
-        color: white;
     }
 
     a {

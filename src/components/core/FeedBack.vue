@@ -18,7 +18,6 @@
                                 label="Name"
                                 required
                         />
-
                         <v-text-field
                                 v-model="email"
                                 :rules="emailRules"
@@ -30,17 +29,12 @@
                             v-model="message"
                             label="Your message"
                         />
-
-
-
-
                         <v-btn
                                 :disabled="!valid"
                                 color="success"
                                 class="mr-4"
-                                @click="validate"
                         >
-                            Validate
+                            Send
                         </v-btn>
 
                         <v-btn
@@ -73,7 +67,14 @@
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
-        })
+        }),
+        methods: {
+            reset: function () {
+                this.message = ''
+                this.name = ''
+                this.email = ''
+            }
+        }
     }
 </script>
 

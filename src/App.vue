@@ -11,9 +11,9 @@
 
 <script>
 
-    import AppBar from "./components/AppBar";
-    import SideBar from "./components/SideBar";
-    import Footer from "./components/Footer";
+    import AppBar from "./components/layout/AppBar";
+    import SideBar from "./components/layout/SideBar";
+    import Footer from "./components/layout/Footer";
 
     export default {
         name: 'App',
